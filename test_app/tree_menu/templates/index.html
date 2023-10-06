@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load tree_menu_tags %}
+
+{% block content %}
+{% draw_menu 'main_menu' as menu_dict %}
+
+{% if menu_dict %}
+    <h>{{ menu_dict.name }}</h>
+    <ul>
+        {% for item in menu_dict.children %}
+            <li>
+                {{ item.name }}
+                {% if item.children %}
+                    <ul>
+                        {% for child in item.children %}
+                            <li>{{ child.name }}</li>
+                            {% if child.children %}
+                                <ul>
+                                    {% for subchild in child.children %}
+                                        <li>{{ subchild.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% draw_menu 'Not the main menu' as menu_dict %}
+
+{% if menu_dict %}
+    <h>{{ menu_dict.name }}</h>
+    <ul>
+        {% for item in menu_dict.children %}
+            <li>
+                {{ item.name }}
+                {% if item.children %}
+                    <ul>
+                        {% for child in item.children %}
+                            <li>{{ child.name }}</li>
+                            {% if child.children %}
+                                <ul>
+                                    {% for subchild in child.children %}
+                                        <li>{{ subchild.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
